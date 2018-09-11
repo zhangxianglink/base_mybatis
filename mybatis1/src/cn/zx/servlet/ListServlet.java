@@ -27,9 +27,32 @@ public class ListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+
+		     request.setCharacterEncoding("utf-8");
+			String command = request.getParameter("command");
+			String des = request.getParameter("description");
+			System.out.println(command+":"+des);
+			
+			request.setAttribute("command", command);
+			request.setAttribute("des", des);
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/mydemo", "root", "123");
-			PreparedStatement statement = conn.prepareStatement("SELECT ID,COMMAND,DESCRIPTION,CONTENT FROM message");
+			StringBuilder builder = new StringBuilder("SELECT ID,COMMAND,DESCRIPTION,CONTENT FROM message where 1=1");
+			ArrayList<String> arr = new ArrayList<>();
+			if(command!=null && !"".equals(command.trim())){
+				arr.add(command);
+				builder.append(" and COMMAND = ?");
+			}
+			if(des!=null && !"".equals(des.trim())){
+				arr.add(des);
+				builder.append(" and DESCRIPTION like concat('%',?,'%')");
+			}
+			System.out.println(builder.toString());
+			PreparedStatement statement = conn.prepareStatement(builder.toString());
+			for (int i = 0; i < arr.size(); i++) {
+				System.out.println(arr.get(i));
+				statement.setString(i+1, arr.get(i));
+			}
 			ResultSet resultSet = statement.executeQuery();
 			//自定义一个集合
 			List<Article> list = new ArrayList<Article>();
@@ -41,10 +64,10 @@ public class ListServlet extends HttpServlet {
 				article.setCommand(resultSet.getString("COMMAND"));
 				article.setDescription(resultSet.getString("DESCRIPTION"));
 				article.setContent(resultSet.getString("CONTENT"));
-				System.out.println(article.toString());
+//				System.out.println(article.toString());
 				list.add(article);
 			}
-			request.setAttribute("messageList", list);
+			request.setAttribute("articleList", list);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
