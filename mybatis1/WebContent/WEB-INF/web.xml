@@ -19,4 +19,24 @@
     <servlet-name>ListServlet</servlet-name>
     <url-pattern>/list.action</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteOne</display-name>
+    <servlet-name>DeleteOne</servlet-name>
+    <servlet-class>cn.zx.servlet.DeleteOne</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteOne</servlet-name>
+    <url-pattern>/deleteOne.action</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteAll</display-name>
+    <servlet-name>DeleteAll</servlet-name>
+    <servlet-class>cn.zx.servlet.DeleteAll</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAll</servlet-name>
+    <url-pattern>/deleteAll.action</url-pattern>
+  </servlet-mapping>
 </web-app>
