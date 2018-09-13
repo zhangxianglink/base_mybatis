@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import cn.zx.db.DBAccess;
 import cn.zx.pojo.Article;
+import cn.zx.repository.ListInterface;
 import cn.zx.utils.JdbcUtils;
 
 /**
@@ -19,6 +20,8 @@ import cn.zx.utils.JdbcUtils;
  * @author Administrator
  */
 public class ListDao {
+	
+	
 	
 	public List<Article> getArticleList(String command, String des)  {
 		List<Article> list = new ArrayList<Article>();
@@ -29,7 +32,9 @@ public class ListDao {
 			Article article = new Article();
 			article.setCommand(command);
 			article.setDescription(des);
-			list = sqlSession.selectList("Article.queryArticleList",article);
+//			list = sqlSession.selectList("Article.queryArticleList",article);
+			ListInterface listInterface = sqlSession.getMapper(ListInterface.class);
+			list = listInterface.queryArticleList(article);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -20,7 +20,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="Article">
+<mapper namespace="cn.zx.repository.ListInterface">
 
   <resultMap type="cn.zx.pojo.Article" id="ArticleResult">
     <id column="ID" jdbcType="INTEGER" property="id"/>
@@ -29,7 +29,7 @@
     <result column="CONTENT" jdbcType="VARCHAR" property="content"/>
   </resultMap>
 
-  <select id="queryArticleList" parameterType="cn.zx.pojo.Article"  resultMap="ArticleResult">
+  <select id="queryArticleList" parameterType="cn.zx.pojo.Article"  resultMap="ArticleResult" >
     SELECT ID,COMMAND,DESCRIPTION,CONTENT FROM message where 1=1
     <if test="command != null and !&quot;&quot;.equals(command.trim())">
      and COMMAND = #{command}

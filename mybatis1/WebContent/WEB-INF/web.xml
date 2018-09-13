@@ -39,4 +39,22 @@
     <servlet-name>DeleteAll</servlet-name>
     <url-pattern>/deleteAll.action</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>InitTalkServlet</servlet-name>
+  	<servlet-class>cn.zx.servlet.InitTalkServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>InitTalkServlet</servlet-name>
+  	<url-pattern>/InitTalkServlet.action</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>AutoReplyServlet</servlet-name>
+  	<servlet-class>cn.zx.servlet.AutoReplyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AutoReplyServlet</servlet-name>
+  	<url-pattern>/AutoReplyServlet.action</url-pattern>
+  </servlet-mapping>
 </web-app>
