@@ -13,4 +13,10 @@ public interface ListInterface {
 
 	public List<Article> queryArticleList(Article article);
 	
+	public void insertArticle(Article article);
+	
+	public Article selectOne(Integer id);
+	
+	public void updateArticleByID(Article article);
+	
 }
