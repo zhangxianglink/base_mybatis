@@ -3,6 +3,7 @@ package cn.zx.repository;
 import java.util.List;
 
 import cn.zx.pojo.Article;
+import cn.zx.pojo.Command;
 
 /**
  * 采用接口式编程解决交互
@@ -18,5 +19,7 @@ public interface ListInterface {
 	public Article selectOne(Integer id);
 	
 	public void updateArticleByID(Article article);
+	
+	public List<Command> queryConmand(Command command);
 	
 }

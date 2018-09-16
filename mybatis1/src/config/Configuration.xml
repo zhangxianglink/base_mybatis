@@ -48,6 +48,7 @@
 
   <mappers>
     <mapper resource="config/mapper/ArticleMapper.xml"/>
+     <mapper resource="config/mapper/Command.xml"/> 
   </mappers>
 
 </configuration>
