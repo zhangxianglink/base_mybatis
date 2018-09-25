@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+       Copyright 2009-2016 the original author or authors.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+
+-->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.zx.repository.ListInterface">
+
+  <resultMap type="cn.zx.pojo.Command" id="CommandResult">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="cname" jdbcType="VARCHAR" property="cname"/>
+    <result column="description" jdbcType="VARCHAR" property="description"/>
+   <collection property="contents"  ofType="cn.zx.pojo.C_Content">
+     <id column="b_id" jdbcType="INTEGER" property="id"/>
+     <result column="content" jdbcType="VARCHAR"  property="content"/>
+     <result column="c_id" jdbcType="INTEGER"  property="c_id"/>
+   </collection>
+  </resultMap>
+
+  <select id="queryConmand" parameterType="cn.zx.pojo.Command"  resultMap="CommandResult" >
+  SELECT a.id, a.cname ,a.description, b.id as b_id, b.content ,b.c_id
+  FROM command a LEFT JOIN command_content b ON a.id = b.c_id  
+  <where>
+   <if test="cname != null and !&quot;&quot;.equals(cname.trim())">
+     and a.cname = #{cname}
+    </if>
+    <if test="description != null and !&quot;&quot;.equals(description.trim())">
+     and a.description like CONCAT('%',#{description},'%')
+    </if>
+    </where>
+  </select>
+ 
+  
+  
+ 
+</mapper>
